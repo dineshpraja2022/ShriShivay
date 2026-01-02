@@ -14,7 +14,7 @@ const app = express();
 // ✅ Allowed frontend origins
 const allowedOrigins = [
   "http://localhost:5173", // local dev
-  // "https://yourfrontend.com" // production URL
+   "https://shrishivay.netlify.app" // production URL
 ];
 
 // ✅ Middlewares
