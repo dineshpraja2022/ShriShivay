@@ -12,13 +12,15 @@ export const sellerLogin = async (req, res) => {
       });
       res.cookie("sellerToken", token, {
         httpOnly: true,
-        secure: process.env.NODE_ENV === "production",
-        sameSite: process.env.NODE_ENV === "production" ? "none" : "Strict",
+         secure: true,        // 🔥 FORCE TRUE on Render
+         sameSite: "none",    // 🔥 MUST for Netlify ↔ Render
+        // secure: process.env.NODE_ENV === "production",
+        // sameSite: process.env.NODE_ENV === "production" ? "none" : "Strict",
         maxAge: 7 * 24 * 60 * 60 * 1000,
       });
       return res
         .status(200)
-        .json({ message: "Login successful", success: true });
+        .json({ message: "Login successful", success: true  });
     } else {
       return res
         .status(400)
