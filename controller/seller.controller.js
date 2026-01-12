@@ -12,15 +12,15 @@ export const sellerLogin = async (req, res) => {
       });
       res.cookie("sellerToken", token, {
         httpOnly: true,
-         secure: true,        // 🔥 FORCE TRUE on Render
-         sameSite: "none",    // 🔥 MUST for Netlify ↔ Render
+        secure: true,        // 🔥 FORCE TRUE on Render
+        sameSite: "none",    // 🔥 MUST for Netlify ↔ Render
         // secure: process.env.NODE_ENV === "production",
         // sameSite: process.env.NODE_ENV === "production" ? "none" : "Strict",
         maxAge: 7 * 24 * 60 * 60 * 1000,
       });
       return res
         .status(200)
-        .json({ message: "Login successful", success: true  });
+        .json({ message: "Login successful", success: true });
     } else {
       return res
         .status(400)
@@ -48,9 +48,10 @@ export const sellerLogout = async (req, res) => {
   try {
     res.clearCookie("sellerToken", {
       httpOnly: true,
-      secure: process.env.NODE_ENV === "production",
-      sameSite: process.env.NODE_ENV === "production" ? "none" : "Strict",
+      secure: true,
+      sameSite: "none",
     });
+
     return res.status(200).json({
       message: "Logged out successfully",
       success: true,
@@ -60,3 +61,4 @@ export const sellerLogout = async (req, res) => {
     res.status(500).json({ message: "Internal server error" });
   }
 };
+
